@@ -15,5 +15,14 @@ Then copy the clone URL to your clipboard.
 
 2. Run `npm run start-dev` to start the server. This will start both Express server and Webpack server for react.
 
+At localhost:3000/login, you'll see a page like below-
+
+![Alt text](/public/_assets/images/login.png?raw=true "Login")
+
+At localhost:3000/signup, you'll see a page like below-
+
+![Alt text](/public/_assets/images/signup.png?raw=true "Sign Up")
+
+Try submitting the forms without filling the fields. You'll see respective errors.
 
 And you'll be good to go :thumbsup:
