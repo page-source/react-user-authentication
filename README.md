@@ -1,6 +1,6 @@
 # React-Express based User Authentication
 
-This gist contains the code to create a code for User Authentication with react & ES6.
+This gist contains the code to create a code for User Authentication with React & Express.
 
 ----
 ### Setup
