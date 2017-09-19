@@ -1,8 +1,8 @@
 const express = require('express');
 const validator = require('validator');
+const passport = require('passport');
 
-const router = new express.Router();
-
+var router =express.Router();
 /**
  * Validate the sign up form
  *
@@ -48,7 +48,7 @@ function validateSignupForm(payload) {
  * @returns {object} The result of validation. Object contains a boolean validation result,
  *                   errors tips, and a global message for the whole form.
  */
-function validateLoginForm(payload) {console.log(payload);
+function validateLoginForm(payload) {
   const errors = {};
   let isFormValid = true;
   let message = '';
@@ -73,12 +73,48 @@ function validateLoginForm(payload) {console.log(payload);
     errors
   };
 }
-// router.get('/login', (req, res) => {
-// 	console.log("hereeee");
 
-// });
-router.post('/signup', (req, res) => {
-  const validationResult = validateSignupForm(req.body);
+
+router.post('/signup', (req, res, next) => {
+    const validationResult = validateSignupForm(req.body);
+    if (!validationResult.success) {
+      return res.status(400).json({
+        success: false,
+        message: validationResult.message,
+        errors: validationResult.errors
+      });
+    }
+
+
+    return passport.authenticate('local-signup', (err) => {
+      if (err) {
+        if (err.name === 'MongoError' && err.code === 11000) {
+          // the 11000 Mongo code is for a duplication email error
+          // the 409 HTTP status code is for conflict error
+          return res.status(409).json({
+            success: false,
+            message: 'Check the form for errors.',
+            errors: {
+              email: 'This email is already taken.'
+            }
+          });
+        }
+
+        return res.status(400).json({
+          success: false,
+          message: 'Could not process the form.'
+        });
+      }
+
+      return res.status(200).json({
+        success: true,
+        message: 'You have successfully signed up! Now you should be able to log in.'
+      });
+    })(req, res, next)
+  });
+
+router.post('/login', (req, res, next) => {
+  const validationResult = validateLoginForm(req.body);
   if (!validationResult.success) {
     return res.status(400).json({
       success: false,
@@ -87,27 +123,26 @@ router.post('/signup', (req, res) => {
     });
   }
 
-  return res.status(200).end();
+
+  return passport.authenticate('local-login', (err, token, userData) => {
+    if (err) {
+      if (err.name === 'IncorrectCredentialsError') {
+        return res.status(400).json({
+          success: false,
+          message: err.message
+        });
+      }
+      return res.status(400).json({
+        success: false,
+        message: 'Could not process the form.'
+      });
+    }
+    return res.json({
+      success: true,
+      message: 'You have successfully logged in!',
+      token,
+      user: userData
+    });
+  })(req, res, next);
 });
-
-router.post('/login', (req, res) => {
-	// res.setHeader('Access-Control-Allow-Origin', ' * ');
- //    res.setHeader('Access-Control-Allow-Credentials', 'true');
- //    res.setHeader('Access-Control-Allow-Methods', 'GET, HEAD, OPTIONS, POST, PUT, DELETE');
- //    res.setHeader('Access-Control-Allow-Headers', 'Access-Control-Allow-Headers, Origin, Accept, X-Requested-With, Content-Type,Access-Control-Request-Method,Access-Control-Request-Headers');
- //    res.setHeader('Cache-Control', 'no-cache');
-
-	const validationResult = validateLoginForm(req.body);
-	if (!validationResult.success) {
-		return res.status(400).json({
-			success: false,
-			message: validationResult.message,
-			errors: validationResult.errors
-		});
-	}
-
-  return res.status(200).end();
-});
-
-
 module.exports = router;

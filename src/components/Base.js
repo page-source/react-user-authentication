@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link ,NavLink} from 'react-router-dom';
 import PropTypes from 'prop-types';
+import Auth from '../modules/Auth';
 
 
 const Base = ({ props, children }) => (
@@ -10,10 +11,17 @@ const Base = ({ props, children }) => (
         <NavLink to="/">Home</NavLink>
       </div>
 
-      <div className="top-bar-right">
-        <Link to="/login">Log in</Link>
-        <Link to="/signup">Sign up</Link>
-      </div>
+    {Auth.isUserAuthenticated() ? (
+        <div className="top-bar-right">
+          <Link to="/logout">Log out</Link>
+        </div>
+      ) : (
+        <div className="top-bar-right">
+          <Link to="/login">Log in</Link>
+          <Link to="/signup">Sign up</Link>
+        </div>
+      )}
+
 
     </div>
 

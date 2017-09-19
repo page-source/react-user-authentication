@@ -1,14 +1,14 @@
-import React from 'react';
-import SignUpForm from '../components/SignUpForm';
-//import PropTypes from 'prop-types';
-
+import React from 'react'
+import PropTypes from 'prop-types'
+import SignUpForm from '../components/SignUpForm'
+import {withRouter} from 'react-router-dom'
 class SignUpPage extends React.Component {
 
   /**
    * Class constructor.
    */
-  constructor(props) {
-    super(props);
+  constructor(props,context) {
+    super(props,context);
 
     // set the initial component state
     this.state = {
@@ -48,17 +48,22 @@ class SignUpPage extends React.Component {
     // prevent default action. in this case, action is the form submission event
     event.preventDefault();
     // create a string for an HTTP body message
-    const name = encodeURIComponent(this.state.user.name);
-    const email = encodeURIComponent(this.state.user.email);
-    const password = encodeURIComponent(this.state.user.password);
-    const formData = `name=${name}&email=${email}&password=${password}`;
-    // create an AJAX request
+    const name = this.state.user.name;
+    const email = this.state.user.email;
+    const password = this.state.user.password;
+   // const formData = `name=${name}&email=${email}&password=${password}`;
+
+    const formData =  { email        : email, 
+                        name         : name,
+                        password     : password
+                      };
     fetch(this.props.url, {
-        method: 'post',
-        headers: {
-            'Accept': 'application/json, text/plain, */*'
-        },
-        body: JSON.stringify(formData)
+      method: 'post',
+      headers: {
+          'Accept': 'application/json, text/plain, */*',
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(formData)
     })
     .then(res=>res.json())
     .then(res =>  {
@@ -72,9 +77,13 @@ class SignUpPage extends React.Component {
           this.setState({
             errors: {}
           });
+           // set a message
+          localStorage.setItem('successMessage', res.message);
+
+          // make a redirect
+          this.props.history.push("/login");
         }
-      }
-    )
+    })
   }
 
   /**
@@ -90,7 +99,10 @@ class SignUpPage extends React.Component {
       />
     );
   }
-
 }
 
-export default SignUpPage;
+SignUpPage.contextTypes = {
+  router: PropTypes.object.isRequired
+};
+
+export default withRouter(SignUpPage);
