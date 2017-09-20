@@ -11,6 +11,7 @@ import HomePage from './components/HomePage';
 import LoginPage from './containers/LoginPage';
 import SignUpPage from './containers/SignUpPage';
 import DashboardPage from './containers/DashboardPage';
+import Logout from './containers/Logout';
 
 const muiTheme = createMuiTheme({
     palette: createPalette({
@@ -31,6 +32,9 @@ const App = () =>(
 	        	}/>
 		        <Route exact path="/dashboard" render={props => 
 		            <DashboardPage />
+		        }/>
+		         <Route exact path="/logout" render={props => 
+		            <Logout />
 		        }/>
 		        <Route exact path="/signup" render={props => 
 		            <SignUpPage url="/auth/signup"/>

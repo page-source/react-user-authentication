@@ -8,7 +8,11 @@ const Base = ({ props, children }) => (
   <div>
     <div className="top-bar">
       <div className="top-bar-left" style={props}>
+      {Auth.isUserAuthenticated() ? (
+        <NavLink to="/dashboard">Home</NavLink>
+      ) : (
         <NavLink to="/">Home</NavLink>
+      )}
       </div>
 
     {Auth.isUserAuthenticated() ? (

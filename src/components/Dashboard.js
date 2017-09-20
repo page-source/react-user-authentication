@@ -6,7 +6,7 @@ const Dashboard = ({ secretData }) => (
   <Card className="container">
     <CardHeader
       title="Dashboard"
-      subheader="You should get access to this page only after authentication.">
+      subheader="You have sucessfully logged in!">
 
     </CardHeader>
 

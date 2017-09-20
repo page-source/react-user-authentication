@@ -2,7 +2,6 @@ import React from 'react'
 import Auth from '../modules/Auth'
 import LoginForm from '../components/LoginForm'
 import {withRouter} from 'react-router-dom'
-//import PropTypes from 'prop-types';
 
 class LoginPage extends React.Component {
   constructor(props) {
@@ -26,20 +25,11 @@ class LoginPage extends React.Component {
     this.processForm = this.processForm.bind(this);
     this.changeUser = this.changeUser.bind(this);
   }
-
-  /**
-   * Process the form.
-   *
-   * @param {object} event - the JavaScript event object
-   */
   processForm(event) {
-    // prevent default action. in this case, action is the form submission event
     event.preventDefault();
-     // create a string for an HTTP body message
     const email = this.state.user.email;
     const password = this.state.user.password;
-    //const formData = `email=${email}&password=${password}`;
-     const formData =  { email  : email, 
+    const formData =  { email  : email, 
                         password: password
                       };
     // create an AJAX request
@@ -65,17 +55,12 @@ class LoginPage extends React.Component {
             errors: {}
           });
            // make a redirect
-          this.props.history.push("/");
+          this.props.history.push("/dashboard");
         }
       }
     )
   }
 
-  /**
-   * Change the user object.
-   *
-   * @param {object} event - the JavaScript event object
-   */
   changeUser(event) {
     const field = event.target.name;
     const user = this.state.user;
@@ -86,9 +71,6 @@ class LoginPage extends React.Component {
     });
   }
 
-  /**
-   * Render the component.
-   */
   render() {
     return (
       <LoginForm
