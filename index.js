@@ -10,7 +10,7 @@ require('./server/models').connect(config.dbUri, {
 
 const app = express();
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
 
 // tell the app to parse HTTP body messages
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -49,6 +49,7 @@ app.get('/', function(req, res) {
 	res.json({ message: 'API Initialized!'});
 });
 // start the server
+console.log("port is "+ PORT);
 app.listen(PORT, () => {
   console.log('Server is running on http://localhost:3001 or http://127.0.0.1:3001');
 });
