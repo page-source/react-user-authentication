@@ -12,12 +12,6 @@ const app = express();
 
 const PORT = process.env.PORT || 5000;
 
-
-// tell the app to look for static files in these directories
-//app.use(express.static('./server/static/'));
-//app.use(express.static('./client/dist/'));
-
-
 // tell the app to parse HTTP body messages
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());

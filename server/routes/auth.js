@@ -3,13 +3,7 @@ const validator = require('validator');
 const passport = require('passport');
 
 var router =express.Router();
-/**
- * Validate the sign up form
- *
- * @param {object} payload - the HTTP body message
- * @returns {object} The result of validation. Object contains a boolean validation result,
- *                   errors tips, and a global message for the whole form.
- */
+
 function validateSignupForm(payload) {
   const errors = {};
   let isFormValid = true;
@@ -41,13 +35,6 @@ function validateSignupForm(payload) {
   };
 }
 
-/**
- * Validate the login form
- *
- * @param {object} payload - the HTTP body message
- * @returns {object} The result of validation. Object contains a boolean validation result,
- *                   errors tips, and a global message for the whole form.
- */
 function validateLoginForm(payload) {
   const errors = {};
   let isFormValid = true;
@@ -73,7 +60,6 @@ function validateLoginForm(payload) {
     errors
   };
 }
-
 
 router.post('/signup', (req, res, next) => {
     const validationResult = validateSignupForm(req.body);
