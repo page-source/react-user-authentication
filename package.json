@@ -37,6 +37,7 @@
     "start-dev": "nf start -p 3000",
     "deploy": "npm run build"
   },
+  "proxy":"http://localhost:3001",
   "devDependencies": {
     "gh-pages": "^1.0.0"
   }
