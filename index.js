@@ -48,8 +48,10 @@ app.use(express.static(path.resolve(__dirname,'build')));
 app.get('/', function(req, res) {
 	res.json({ message: 'API Initialized!'});
 });
-// start the server
-console.log("port is "+ PORT);
+
+app.get('*', function(request, response) {
+  response.sendFile(path.resolve(__dirname, './build', 'index.html'));
+});
 app.listen(PORT, () => {
   console.log('Server is running on http://localhost:3001 or http://127.0.0.1:3001');
 });
