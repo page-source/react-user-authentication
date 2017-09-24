@@ -6,7 +6,6 @@
     "type": "git",
     "url": "https://github.com/page-source/react-user-authentication.git"
   },
-  "homepage": "https://react-user-authentication.herokuapp.com/",
   "dependencies": {
     "bcrypt": "^1.0.3",
     "body-parser": "^1.18.0",
