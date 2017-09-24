@@ -10,6 +10,7 @@ require('./server/models').connect(config.dbUri, {
 
 const app = express();
 
+const PORT = process.env.PORT || 5000;
 
 
 // tell the app to look for static files in these directories
@@ -48,11 +49,12 @@ const authRoutes = require('./server/routes/auth');
 const apiRoutes = require('./server/routes/api');
 app.use('/auth', authRoutes);
 app.use('/api', apiRoutes);
-	
+
+app.use(express.static(path.resolve(__dirname,'build')));
 app.get('/', function(req, res) {
 	res.json({ message: 'API Initialized!'});
 });
 // start the server
-app.listen(process.env.PORT || 3001, () => {
+app.listen(PORT, () => {
   console.log('Server is running on http://localhost:3001 or http://127.0.0.1:3001');
 });
