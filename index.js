@@ -3,6 +3,11 @@ const bodyParser = require('body-parser');
 const passport = require('passport');
 const config = require('./config');
 const path = require('path');
+// connect to the database and load models
+require('./server/models').connect(config.dbUri, {
+  useMongoClient: true,
+});
+
 const app = express();
 
 const PORT = process.env.PORT || 3000;
