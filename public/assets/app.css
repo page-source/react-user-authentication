@@ -71,3 +71,15 @@ a:hover {
   padding: 0 16px;
   color: green;
 }
+
+.ajaxLoader{
+  position: absolute;
+  text-align: center;
+  background: rgba(255,255,255,.5);
+  width: 98%;
+  padding: 5px;
+  z-index:9;
+  opacity: 0.25;
+  height: 100%;
+  top: 20%;
+}
