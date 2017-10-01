@@ -14,7 +14,7 @@ module.exports = new PassportLocalStrategy({
   passReqToCallback: true
 }, (req, email, password, done) => {
   const userData = {
-    email: email.trim(),
+    email: email.trim().toLowerCase(),
     password: password.trim()
   };
 
