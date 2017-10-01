@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom';
 import Button from 'material-ui/Button';
 
 const Logout = () => (
-  <Card className="container">
+  <Card className="textCenter">
     <CardHeader
       title="Logged Out!"
       subheader="You have been logged out of this application.">
