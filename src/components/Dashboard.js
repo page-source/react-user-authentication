@@ -3,7 +3,7 @@ import Card, {CardHeader, CardContent} from 'material-ui/Card';
 import PropTypes from 'prop-types';
 
 const Dashboard = ({ secretData }) => (
-  <Card className="container">
+  <Card className="textCenter">
     <CardHeader
       title="Dashboard"
       subheader="You have sucessfully logged in!">
