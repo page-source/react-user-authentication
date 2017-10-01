@@ -15,7 +15,7 @@ a {
 a:hover {
   color: #1976d2;
 }
-.homePage{
+.homePage,.dashboard{
   margin-top: 15px;
   padding-bottom: 50px;
 }
@@ -36,7 +36,9 @@ a:hover {
   display: block;
   clear: both;
 }
-
+.notFound img{
+  width: 80%;
+}
 .top-bar-left {
   float: left;
   font-size: 1.5em;
