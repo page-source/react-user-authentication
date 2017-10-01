@@ -54,7 +54,7 @@ a:hover {
 
 .footerLinks{
     position: absolute;
-    top: 565px;
+    top: 580px;
     left: 50%;
     transform: translateX(-50%);
     display: inline-flex;
@@ -93,11 +93,11 @@ a:hover {
   float: none;
 }
 .card-heading {
-  padding: 16px;
+  padding: 14px;
 }
 
 .field-line, .button-line {
-  padding: 16px;
+  padding: 12px;
 }
 
 .error-message {
