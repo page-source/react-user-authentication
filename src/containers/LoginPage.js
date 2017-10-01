@@ -19,13 +19,17 @@ class LoginPage extends React.Component {
       user: {
         email: '',
         password: ''
-      }
+      },
+      isFetching:false
     };
 
     this.processForm = this.processForm.bind(this);
     this.changeUser = this.changeUser.bind(this);
   }
   processForm(event) {
+    this.setState({
+      isFetching:"loading"
+    });
     event.preventDefault();
     const email = this.state.user.email;
     const password = this.state.user.password;
@@ -43,6 +47,9 @@ class LoginPage extends React.Component {
     })
     .then(res=>res.json())
     .then(res =>  {
+        this.setState({
+          isFetching:false
+        });
         if(res.success===false){
             const errors = res.errors ? res.errors : {};
             errors.summary = res.message;
@@ -79,6 +86,7 @@ class LoginPage extends React.Component {
         errors={this.state.errors}
         successMessage={this.state.successMessage}
         user={this.state.user}
+        isFetching={this.state.isFetching}
       />
     );
   }

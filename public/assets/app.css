@@ -78,6 +78,10 @@ a:hover {
   }
 }
 
+form.loading{
+  pointer-events: none;
+  opacity: 0.4;
+}
 .textCenter{
   text-align: center;
 }

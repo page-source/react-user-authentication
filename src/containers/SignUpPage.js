@@ -4,9 +4,6 @@ import SignUpForm from '../components/SignUpForm'
 import {withRouter} from 'react-router-dom'
 class SignUpPage extends React.Component {
 
-  /**
-   * Class constructor.
-   */
   constructor(props,context) {
     super(props,context);
 
@@ -17,18 +14,14 @@ class SignUpPage extends React.Component {
         email: '',
         name: '',
         password: ''
-      }
+      },
+      isFetching:false
     };
 
     this.processForm = this.processForm.bind(this);
     this.changeUser = this.changeUser.bind(this);
   }
 
-  /**
-   * Change the user object.
-   *
-   * @param {object} event - the JavaScript event object
-   */
   changeUser(event) {
     const field = event.target.name;
     const user = this.state.user;
@@ -39,12 +32,10 @@ class SignUpPage extends React.Component {
     });
   }
 
-  /**
-   * Process the form.
-   *
-   * @param {object} event - the JavaScript event object
-   */
   processForm(event) {
+    this.setState({
+      isFetching:"loading"
+    });
     // prevent default action. in this case, action is the form submission event
     event.preventDefault();
     // create a string for an HTTP body message
@@ -67,6 +58,9 @@ class SignUpPage extends React.Component {
     })
     .then(res=>res.json())
     .then(res =>  {
+        this.setState({
+          isFetching:false
+        });
         if(res.success===false){
             const errors = res.errors ? res.errors : {};
             errors.summary = res.message;
@@ -96,6 +90,7 @@ class SignUpPage extends React.Component {
         onChange={this.changeUser}
         errors={this.state.errors}
         user={this.state.user}
+        isFetching={this.state.isFetching}
       />
     );
   }

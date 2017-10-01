@@ -10,9 +10,10 @@ const SignUpForm = ({
   onChange,
   errors,
   user,
+  isFetching
 }) => (
   <Card>
-    <form action="/" onSubmit={onSubmit} className="textCenter">
+    <form action="/" onSubmit={onSubmit} className={`textCenter ${isFetching}`}>
       <h2 className="card-heading">Sign Up</h2>
 
       {errors.summary && <p className="error-message">{errors.summary}</p>}
