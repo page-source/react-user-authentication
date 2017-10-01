@@ -1,7 +1,7 @@
 import React from 'react';
 import createMuiTheme from 'material-ui/styles/createMuiTheme'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import {amber, red, pink} from 'material-ui/colors'
+import {amber,red, pink} from 'material-ui/colors'
 import createPalette from 'material-ui/styles/createPalette'
 import {
   BrowserRouter as Router, Route, Redirect
@@ -10,6 +10,7 @@ import Base from './components/Base';
 import HomePage from './components/HomePage';
 import LoginPage from './containers/LoginPage';
 import SignUpPage from './containers/SignUpPage';
+import FooterLinks from './components/FooterLinks';
 import DashboardPage from './containers/DashboardPage';
 import Logout from './containers/Logout';
 import Auth from './modules/Auth';
@@ -18,10 +19,10 @@ const muiTheme = createMuiTheme({
       primary: pink,
       accent: amber,
       error: red,
-      type: 'light'
+      type: 'light',
+      contrast: red
     })
 });
-
 const App = () =>(
 	<MuiThemeProvider theme={muiTheme}>
 	    <Router>
@@ -46,6 +47,7 @@ const App = () =>(
 		        <Route exact path="/login" render={props => 
 		            <LoginPage url="/auth/login"/>
 		        }/>
+		       <FooterLinks/>
 	  		</div>
 	  	</Router>
   	</MuiThemeProvider>
