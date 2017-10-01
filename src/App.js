@@ -44,13 +44,13 @@ const App = () =>(
 						    <Redirect to="/login"/>
 						)
 			        )}/>
-			        <Route exact path="/logout" render={props => (
-			         	Auth.isUserAuthenticated() ? (
-		            		<Redirect to="/dashboard"/>
+			        <Route exact path="/logout" render={props =>
+						Auth.isUserAuthenticated() ? (
+		            		<Logout />
 		            	) : (
-						    <Logout />
+						    <Redirect to="/"/>
 						)
-			        )}/>
+			        }/>
 			        <Route exact path="/signup" render={props => (
 			        	Auth.isUserAuthenticated() ? (
 		            		<Redirect to="/dashboard"/>
