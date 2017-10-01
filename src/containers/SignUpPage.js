@@ -63,7 +63,7 @@ class SignUpPage extends React.Component {
           'Accept': 'application/json, text/plain, */*',
           'Content-Type': 'application/json'
       },
-      body: JSON.stringify(formData)
+      body: formData
     })
     .then(res=>res.json())
     .then(res =>  {
