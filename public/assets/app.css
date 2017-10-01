@@ -54,10 +54,10 @@ a:hover {
 
 .footerLinks{
     position: absolute;
-    top: 580px;
     left: 50%;
     transform: translateX(-50%);
     display: inline-flex;
+    margin-top: 40px;
 }
 .homeButtons{
   padding-bottom: 65px;
